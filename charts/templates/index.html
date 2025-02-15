@@ -1,0 +1,507 @@
+{% load static %}
+<html>
+   <head>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+      <title>Geo LLM simple map dashboard</title>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.css">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.16/css/dataTables.bootstrap4.css">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+      <link rel="stylesheet" href="{% static 'style.css' %}">
+      <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+      <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>   
+   </head>
+   <body class="fixed-nav sticky-footer bg-dark" id="page-top">
+      <!-- Navigation-->
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+         <a class="navbar-brand" href="#">Infra Connect</a>
+         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+         <span class="navbar-toggler-icon"></span>
+         </button>
+         <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
+               <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
+                  <a class="nav-link" href="#">
+                  <i class="fa fa-fw fa-dashboard"></i>
+                  <span class="nav-link-text" id="dashboard_view">Dashboard</span>
+                  </a>
+               </li>
+               <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Scan view">
+                  <a class="nav-link" href="#">
+                  <i class="fa fa-globe"></i>
+                  <span class="nav-link-text" id="scan_view">Scan view</span>
+                  </a>
+               </li>
+               <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Devices">
+                  <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponents" data-parent="#exampleAccordion">
+                  <i class="fa fa-fw fa-wrench"></i>
+                  <span class="nav-link-text">Devices</span>
+                  </a>
+                  <ul class="sidenav-second-level collapse" id="collapseComponents">
+                     <li>
+                        <a href="#">monitoring</a>
+                     </li>
+                     <li>
+                        <a href="#">earthwork</a>
+                     </li>
+                  </ul>
+               </li>
+               <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Settings">
+                  <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseExamplePages" data-parent="#exampleAccordion">
+                  <i class="fa fa-fw fa-file"></i>
+                  <span class="nav-link-text">Settings</span>
+                  </a>
+                  <ul class="sidenav-second-level collapse" id="collapseExamplePages">
+                     <li>
+                        <a href="#">Login Page</a>
+                     </li>
+                     <li>
+                        <a href="#">Registration Page</a>
+                     </li>
+                     <li>
+                        <a href="#">Forgot Password Page</a>
+                     </li>
+                  </ul>
+               </li>
+               <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Accounts">
+                  <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseMulti" data-parent="#exampleAccordion">
+                  <i class="fa fa-fw fa-sitemap"></i>
+                  <span class="nav-link-text">Accounts</span>
+                  </a>
+                  <ul class="sidenav-second-level collapse" id="collapseMulti">
+                     <li>
+                        <a href="#">Second Level Item</a>
+                     </li>
+                     <li>
+                        <a href="#">Second Level Item</a>
+                     </li>
+                     <li>
+                        <a class="nav-link-collapse collapsed" data-toggle="collapse" href="#collapseMulti2">Third Level</a>
+                        <ul class="sidenav-third-level collapse" id="collapseMulti2">
+                           <li>
+                              <a href="#">Third Level Item</a>
+                           </li>
+                           <li>
+                              <a href="#">Third Level Item</a>
+                           </li>
+                        </ul>
+                     </li>
+                  </ul>
+               </li>
+               <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Link">
+                  <a class="nav-link" href="#">
+                  <i class="fa fa-fw fa-link"></i>
+                  <span class="nav-link-text">Link</span>
+                  </a>
+               </li>
+            </ul>
+            <ul class="navbar-nav sidenav-toggler">
+               <li class="nav-item">
+                  <a class="nav-link text-center" id="sidenavToggler">
+                  <i class="fa fa-fw fa-angle-left"></i>
+                  </a>
+               </li>
+            </ul>
+            <ul class="navbar-nav ml-auto">
+               <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle mr-lg-2" id="messagesDropdown" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="fa fa-fw fa-envelope"></i>
+                  <span class="d-lg-none">Messages
+                  <span class="badge badge-pill badge-primary">12 New</span>
+                  </span>
+                  <span class="indicator text-primary d-none d-lg-block">
+                  <i class="fa fa-fw fa-circle"></i>
+                  </span>
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="messagesDropdown">
+                     <h6 class="dropdown-header">New Messages:</h6>
+                     <div class="dropdown-divider"></div>
+                     <a class="dropdown-item" href="#">
+                        <strong>IRI</strong>
+                        <span class="small float-right text-muted">11:21 AM</span>
+                        <div class="dropdown-message small">Hey there! This new version of SB Admin is pretty awesome! These messages clip off when they reach the end of the box so they don't overflow over to the sides!</div>
+                     </a>
+                     <div class="dropdown-divider"></div>
+                     <a class="dropdown-item" href="#">
+                        <strong>John Doe</strong>
+                        <span class="small float-right text-muted">11:21 AM</span>
+                        <div class="dropdown-message small">I've sent the final files over to you for review. When you're able to sign off of them let me know and we can discuss distribution.</div>
+                     </a>
+                     <div class="dropdown-divider"></div>
+                     <a class="dropdown-item small" href="#">View all messages</a>
+                  </div>
+               </li>
+               <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle mr-lg-2" id="alertsDropdown" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="fa fa-fw fa-bell"></i>
+                  <span class="d-lg-none">Alerts
+                  <span class="badge badge-pill badge-warning">6 New</span>
+                  </span>
+                  <span class="indicator text-warning d-none d-lg-block">
+                  <i class="fa fa-fw fa-circle"></i>
+                  </span>
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="alertsDropdown">
+                     <h6 class="dropdown-header">New Alerts:</h6>
+                     <div class="dropdown-divider"></div>
+                     <a class="dropdown-item" href="#">
+                        <span class="text-success">
+                        <strong>
+                        <i class="fa fa-long-arrow-up fa-fw"></i>Status Update</strong>
+                        </span>
+                        <span class="small float-right text-muted">11:21 AM</span>
+                        <div class="dropdown-message small">This is an automated server response message. All systems are online.</div>
+                     </a>
+                     <div class="dropdown-divider"></div>
+                     <a class="dropdown-item" href="#">
+                        <span class="text-success">
+                        <strong>
+                        <i class="fa fa-long-arrow-up fa-fw"></i>Status Update</strong>
+                        </span>
+                        <span class="small float-right text-muted">11:21 AM</span>
+                        <div class="dropdown-message small">This is an automated server response message. All systems are online.</div>
+                     </a>
+                     <div class="dropdown-divider"></div>
+                     <a class="dropdown-item small" href="#">View all alerts</a>
+                  </div>
+               </li>
+               <li class="nav-item">
+                  <form class="form-inline my-2 my-lg-0 mr-lg-2">
+                     <div class="input-group">
+                        <textarea id="query-input" style="width:700px;" rows="1" type="text" placeholder="Query ..."></textarea>
+                        <span class="input-group-append">
+                        <button id="query-button" class="btn btn-primary" type="button">
+                        <i class="fa fa-search"></i>
+                        </button>
+                        </span>
+                     </div>
+                  </form>
+               </li>
+               <li class="nav-item">
+                  <a class="nav-link" data-toggle="modal" data-target="#exampleModal">
+                  <i class="fa fa-fw fa-sign-out"></i>Logout</a>
+               </li>
+            </ul>
+         </div>
+      </nav>
+      <!-- Navigation-->
+      <div class="content-wrapper">
+         <div class="container-fluid">
+            <!-- Breadcrumbs-->
+            <ol class="breadcrumb">
+               <li class="breadcrumb-item">
+                  <a href="#">Dashboard</a>
+               </li>
+               <li class="breadcrumb-item active">My Dashboard</li>
+            </ol>
+            <!-- Leaflet Map -->            
+            <div class="row">
+               <div class="col-lg-8">
+                   <div class="card mb-3">
+                       <div class="card-header">
+                           <i class="fa fa-map"></i> Infra map
+                       </div>
+                       <div class="card-body">
+                           <div id="leafletMap" style="width:100%; height: 450px"></div>
+                       </div>
+                   </div>
+               </div>
+               <div class="col-lg-4">
+                  <div class="card mb-3">
+                     <div class="card-header">
+                        <i class="fa fa-pie-chart"></i> Data chart
+                     </div>
+                     <div class="card-body">
+                        <div class="form-group row">
+                           <div class="col-sm-4">
+                              <button id="updateButton" type="button" class="btn btn-primary">Update</button>
+                          </div>
+                           <div class="col-sm-8">
+                              <select id="sensorType" class="form-control">
+                                 <option value="IRI">Rutting</option>
+                                 <option value="ACC">Accelerometer</option>
+                                 <option value="TEMP">Temperature</option>
+                                 <option value="ICV">ICV</option>
+                              </select>
+                          </div>
+                       </div>                     
+                        <div id="iotChart" style="width: 100%; height: 350px"></div>
+                     </div>
+                  </div>
+               </div>               
+            </div>               
+            <div class="row">
+               <div class="col-lg-4">
+                  <!-- Bar Chart -->
+                  <div class="card mb-3">
+                     <div class="card-header">
+                        <i class="fa fa-bar-chart"></i> Activity chart
+                     </div>
+                     <div class="card-body">
+                        <div class="row">
+                           <div class="col-sm-8 my-auto">
+                              <div id="columnChart" style="width: 100%; height: 350px"></div>
+                           </div>
+                           <div class="col-sm-4 text-center my-auto">
+                              <div id="columnChart_ready" class="h4 mb-0 text-primary">484,240</div>
+                              <div class="small text-muted">Ready</div>
+                              <hr>
+                              <div id="columnChart_operation" class="h4 mb-0 text-warning">180,400</div>
+                              <div class="small text-muted">Operation</div>
+                              <hr>
+                              <div id="columnChart_shutdown" class="h4 mb-0 text-success">160,219</div>
+                              <div class="small text-muted">Shutdown</div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-lg-8">
+                  <div class="card mb-3">
+                     <div class="card-header">
+                        <i class="fa fa-table"></i> Historical data table
+                     </div>
+                     <div class="card-body">
+                        <div class="table-responsive">
+                           <table id="sensorDataTable" class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                              <thead>
+                                 <tr>
+                                    <th>Name</th>
+                                    <th>Position</th>
+                                    <th>Address</th>
+                                    <th>Count</th>
+                                    <th>Start date</th>
+                                    <th>Value</th>
+                                 </tr>
+                              </thead>
+                              <tbody>
+                                 <tr>
+                                    <td>Energy</td>
+                                    <td>Seoul</td>
+                                    <td>Seocho</td>
+                                    <td>61,402</td>
+                                    <td>2011/04/25</td>
+                                    <td>$320,800</td>
+                                 </tr>
+                                 <tr>
+                                    <td>Resource</td>
+                                    <td>Busan</td>
+                                    <td>M street</td>
+                                    <td>83,102</td>
+                                    <td>2011/05/25</td>
+                                    <td>$221,800</td>
+                                 </tr>
+                                 <tr>
+                                    <td>Energy</td>
+                                    <td>Jeju</td>
+                                    <td>S street</td>
+                                    <td>23,102</td>
+                                    <td>2011/06/22</td>
+                                    <td>$120,800</td>
+                                 </tr>
+                              </tbody>
+                           </table>
+                        </div>
+                     </div>
+                  </div>
+               </div>   
+            </div>
+         </div>
+         <!-- /.container-fluid-->
+         <!-- /.content-wrapper-->
+         <footer class="sticky-footer">
+            <div class="container">
+               <div class="text-center">
+                  <small>Made with <i class="fa fa-heart" style="color:#d53434"></i> | <a href="https://vishwas.me/" target="_blank">Vishwas</a></small>
+               </div>
+            </div>
+         </footer>
+         <!-- Scroll to Top Button-->
+         <a class="scroll-to-top rounded" href="#page-top">
+         <i class="fa fa-angle-up"></i>
+         </a>
+         <!-- Logout Modal-->
+         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+               <div class="modal-content">
+                  <div class="modal-header">
+                     <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                     <span aria-hidden="true">×</span>
+                     </button>
+                  </div>
+                  <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                  <div class="modal-footer">
+                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                     <a class="btn btn-primary" href="#">Logout</a>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+      <script src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/jquery-ui.min.js'></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.5/umd/popper.js"></script>
+      <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.16/js/dataTables.bootstrap4.js"></script>
+      <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+      <script src="{% static 'script.js' %}"></script>
+      <script src="{% static 'webifc.js' %}"></script>
+
+      <script>         
+         var columnChart = new CanvasJS.Chart("columnChart", {
+               animationEnabled: true,
+               exportEnabled: true,
+               axisX: {
+                  lineColor: "rgba(0, 0, 0, .125)",
+                  labelFontColor: "rgba(0, 0, 0, .5)",
+                  tickColor: "rgba(0, 0, 0, .125)"
+               },
+               axisY: {
+                  gridColor: "rgba(0, 0, 0, .125)",
+                  lineColor: "rgba(0, 0, 0, .125)",
+                  labelFontColor: "rgba(0, 0, 0, .5)",
+                  tickColor: "rgba(0, 0, 0, .125)",
+                  includeZero: true
+               },
+               toolTip: {
+                  shared: true
+               },
+               data: [{
+                  type: "column",
+                  color: "rgb(2,117,216)",
+                  name: "Revenue",
+                  yValueFormatString: "$#,###",
+                  dataPoints: {{ column_data | safe }}
+               }]
+            });
+         columnChart.render();
+
+         function fetch_IoT_chart_dataset() {
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', '/charts?fetch_type=column', true);
+            xhr.onreadystatechange = function () {
+               if (xhr.readyState == 4 && xhr.status == 200) {
+                     var columnData = JSON.parse(xhr.responseText);
+                     columnChart.options.data[0].dataPoints = columnData;
+                     columnChart.render();
+
+                     var columnChart_ready = document.getElementById('columnChart_ready');
+                     var columnChart_operation = document.getElementById('columnChart_operation');
+                     var columnChart_shutdown = document.getElementById('columnChart_shutdown');
+                     columnChart_ready.innerHTML = columnData[0].y;
+                     columnChart_operation.innerHTML = columnData[1].y;
+                     columnChart_shutdown.innerHTML = columnData[2].y;
+               }
+            };
+            xhr.send();
+         }
+
+         let lastTime = 0;
+         const interval = 3000;
+         function animationLoop(timestamp) {
+               if (timestamp - lastTime >= interval) {
+                  fetch_IoT_chart_dataset();
+                  lastTime = timestamp;
+               }
+               requestAnimationFrame(animationLoop);
+         }
+         requestAnimationFrame(animationLoop);         
+
+         var iotChart = new CanvasJS.Chart("iotChart", {
+            animationEnabled: true,
+            exportEnabled: true,
+            theme: "light2",
+            title:{
+               text: "Data visualization"
+            },
+            axisX:{
+               valueFormatString: "DD MMM"
+            },
+            axisY: {
+               title: "Datasets",
+               includeZero: false,
+               prefix: ""
+            },
+            data: [{
+               type: "candlestick",
+               showInLegend: true,
+               name: "Hourly sensor variation",
+               yValueFormatString: "##0.00",
+               xValueType: "dateTime",
+               dataPoints: {{ iot_data | safe }},
+               color: "orange"
+            }]
+         });
+         iotChart.render();
+         
+         // Leaflet map
+         var map = L.map('leafletMap').setView([37.5665, 126.9780], 13); // Seoul coordinates
+         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors'
+         }).addTo(map);         
+
+         var redIcon = new L.Icon({
+            iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
+            shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+            iconSize: [25, 41],
+            iconAnchor: [12, 41],
+            popupAnchor: [1, -34],
+            shadowSize: [41, 41]
+         });
+
+         // event
+         function fetch_text_to_code() {
+            var queryInputValue = document.getElementById('query-input').value;
+            var encodedQuery = encodeURIComponent(queryInputValue); // Encode the query to ensure it's safe for URL inclusion
+
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', '/charts?fetch_type=text_to_code&query=' + encodedQuery, true);
+            xhr.onreadystatechange = function () {
+               if (xhr.readyState == 4 && xhr.status == 200) {
+                  var code = JSON.parse(xhr.responseText);
+                  document.getElementById('query-input').value = ""
+                  // var script_code = "map.setView([37.5665, 126.9779], 18); var circle = L.circle([37.5665, 126.9779], {radius: 10, color: 'red', weight: 2, opacity: 0.5, fillOpacity: 0.2}).addTo(map);"
+                  try {
+                     eval(code);
+                  } catch (e) {
+                     console.log(e);
+                     document.getElementById('query-input').value = "Error: " + e;
+                  }
+               }
+            };
+            xhr.send();
+         }         
+         document.getElementById('query-button').addEventListener('click', function() {
+            fetch_text_to_code()
+         });
+         document.getElementById('query-input').addEventListener('keydown', function(event) {
+            if (event.key === "Enter") {
+               fetch_text_to_code();
+            }
+         });         
+         document.getElementById('scan_view').addEventListener('click', function() {
+            window.location.href = '/scan_view';
+         });
+         document.getElementById('dashboard_view').addEventListener('click', function() {
+                window.location.href = '/';
+         });
+
+         document.getElementById('updateButton').addEventListener('click', function() {
+            var sensorType = document.getElementById('sensorType').value;
+            updateView(sensorType);
+         });
+
+         function updateView(sensorType) {
+            // var newDataset = model.getDataset(sensorType);
+            // view.update(newDataset);
+            // var iotChart = document.getElementById('iotChart');
+            // var chartInstance = Chart.getChart(iotChart);
+            // chartInstance.update();            
+            location.reload();
+         }
+      </script>
+   </body>
+</html>
