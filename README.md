@@ -39,7 +39,7 @@ zoom in seoul,  add marker to center of it and draw circle with 5km.
    ```sh
    python -m venv venv
    source venv/bin/activate  # On Windows: venv\Scripts\activate
-   pip install django-cors-headers Django pandas numpy gunicorn whitenoise django-environ
+   pip install django-cors-headers Django pandas numpy gunicorn whitenoise django-environ langchain
    server.bat
    ```
 
