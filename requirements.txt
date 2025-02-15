@@ -1,0 +1,7 @@
+django-cors-headers
+Django
+pandas
+numpy
+gunicorn 
+whitenoise 
+django-environ
