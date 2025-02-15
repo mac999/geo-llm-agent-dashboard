@@ -1,7 +1,7 @@
 # Geo Map AI Agent Dashboard Example Code
 
 ## 📌 Overview
-Geo Map AI Agent Dashboard Example Code is a web-based **interactive mapping solution** powered by **Open-source LLMs (Gemma, LLaMA, etc.)**. It provides **real-time geospatial data visualization** and **AI-driven insights** for infrastructure monitoring. The system is built using **Django**, **Leaflet.js**, and **LLM APIs**, offering an intuitive dashboard with **map-based analytics**. This project has the purpose of demonstration how to use LLM and apply it to map handling. This has simple mechanism with prompt template and algorithm to understand it easily. You can improve the performance related to it after understanding it. 
+Geo Map AI Agent Dashboard Example Code is a web-based **interactive mapping solution** powered by **Open-source LLMs (Gemma, LLaMA, etc.)**. It provides **real-time geospatial data visualization** and **AI-driven insights** for infrastructure monitoring. The system is built using **Django**, **Leaflet.js**, and **LLM APIs**, offering an intuitive dashboard with **map-based analytics**. This project has the purpose of demonstration how to use LLM and apply it to map handling. This has simple mechanism with prompt template and algorithm to understand it easily. You can improve the performance after understanding it. 
 
 ## ✨ Features
 - **AI-driven Geo Analysis**: Uses **multimodal AI models** for geo-data processing.
