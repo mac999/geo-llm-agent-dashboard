@@ -2,7 +2,18 @@
 
 ## 📌 Overview
 Geo Map AI Agent Dashboard Example Code is a web-based **interactive mapping solution** powered by **Open-source LLMs (Gemma, LLaMA, etc.)**. It provides **real-time geospatial data visualization** and **AI-driven insights** for infrastructure monitoring. The system is built using **Django**, **Leaflet.js**, and **LLM APIs**, offering an intuitive dashboard with **map-based analytics**. This project has the purpose of demonstration how to use LLM and apply it to map handling. This has simple mechanism with prompt template and algorithm to understand it easily. You can improve the performance after understanding it. 
-</br><img src="https://github.com/mac999/geo-llm-agent-dashboard/blob/main/doc/geo_llm_demo.gif" width=800 />
+</br><img src="https://github.com/mac999/geo-llm-agent-dashboard/blob/main/doc/geo_llm_demo.gif" width=800 /></br>
+
+## ✨ Prompt exapmles
+   ```sh
+zoom in tokyo and draw circle with 10 km, red color.
+zoom out
+zoom out, 2 times. 
+Zoom in newyork and draw circle with 20 km. blue color.
+zoom out, 3 times. 
+add marker to center of newyork.
+zoom in seoul,  add marker to center of it and draw circle with 5km. 
+   ```
 
 ## ✨ Features
 - **AI-driven Geo Visualization**: Uses **LLM AI models** for geo-data processing.
