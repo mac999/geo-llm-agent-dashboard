@@ -29,7 +29,7 @@ Geo Map AI Agent Dashboard Example Code is a web-based **interactive mapping sol
    python -m venv venv
    source venv/bin/activate  # On Windows: venv\Scripts\activate
    pip install django-cors-headers Django pandas numpy gunicorn whitenoise django-environ
-   run
+   server.bat
    ```
 
 3. **Open in Browser**
