@@ -1,3 +1,11 @@
+'''
+Title: Model 
+Description: This code is used to generate IoT data model from a file.
+Author: Taewook Kang
+Date: 2024-07-01
+Email: laputa99999@gmail.com
+License: MIT
+'''
 import pandas as pd
 from datetime import datetime, timedelta
 from random import randint

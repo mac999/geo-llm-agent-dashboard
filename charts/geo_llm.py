@@ -1,3 +1,11 @@
+'''
+Title: Geo LLM
+Description: This code is used to generate JavaScript code for Leaflet map based on user query text.
+Author: Taewook Kang
+Date: 2024-07-01
+Email: laputa99999@gmail.com
+License: MIT
+'''
 import os, re
 import torch
 from dotenv import load_dotenv
