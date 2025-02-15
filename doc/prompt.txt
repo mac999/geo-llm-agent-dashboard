@@ -1,0 +1,8 @@
+
+zoom in tokyo and draw circle with 10 km, red color.
+zoom out
+zoom out, 2 times. 
+Zoom in newyork and draw circle with 20 km. blue color.
+zoom out, 3 times. 
+add marker to center of newyork.
+zoom in seoul,  add marker to center of it and draw circle with 5km. 
