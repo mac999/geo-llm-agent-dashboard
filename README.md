@@ -8,6 +8,8 @@ Geo Map AI Agent Dashboard Example Code is a web-based **interactive mapping sol
 - **AI-driven Geo Visualization**: Uses **LLM AI models** for geo-data processing.
 - **Interactive Mapping**: Powered by **Leaflet.js** for real-time infrastructure monitoring.
 - **LLM-based Query Processing**: Supports **natural language queries** for location insights.
+
+#### Prompt example
    ```sh
 zoom in tokyo and draw circle with 10 km, red color.
 zoom out
